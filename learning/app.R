@@ -1,51 +1,41 @@
+# #LEARNING SHINY
+# Based on: https://laderast.github.io/gradual_shiny/
+# Title: A gRadual intRoduction do Shiny
+# 
+# # Part 1: Basic architecture of a Shiny App
+# 
+# It is a web based framework for interactive visuals;
+# It is server based: requires an installation of R to work;
+# Interactive figures that help user to explore data;
+# 
+# # Basic shiny app architecture
+# It has 3 parts:
+# 
+# # 1 - UI (usuary interface) -> Tells Shiny what to display on the webpage
+# ex:
+ui <- fluidPage()
+# note that fluidPage is a function
+# uses (), so arguments need to be comma separated
 #
-# This is a Shiny web application. You can run the application by clicking
-# the 'Run App' button above.
-#
-# Find out more about building applications with Shiny here:
-#
-#    http://shiny.rstudio.com/
-#
-
-library(shiny)
-
-# Define UI for application that draws a histogram
-ui <- fluidPage(
-
-    # Application title
-    titlePanel("Old Faithful Geyser Data"),
-
-    # Sidebar with a slider input for number of bins 
-    sidebarLayout(
-        sidebarPanel(
-            sliderInput("bins",
-                        "Number of bins:",
-                        min = 1,
-                        max = 50,
-                        value = 30)
-        ),
-
-        # Show a plot of the generated distribution
-        mainPanel(
-           plotOutput("distPlot")
-        )
-    )
-)
-
-# Define server logic required to draw a histogram
-server <- function(input, output) {
-
-    output$distPlot <- renderPlot({
-        # generate bins based on input$bins from ui.R
-        x    <- faithful[, 2]
-        bins <- seq(min(x), max(x), length.out = input$bins + 1)
-
-        # draw the histogram with the specified number of bins
-        hist(x, breaks = bins, col = 'darkgray', border = 'white',
-             xlab = 'Waiting time to next eruption (in mins)',
-             main = 'Histogram of waiting times')
-    })
-}
-
-# Run the application 
+# # 2 - SERVER -> Runs R code - Create outputs to be used in the UI (based on parameters by user)
+# ex:
+server <- function(input, output) {}
+# Note that server defines a new function
+# Uses {} (curly brackets), so code is separated by line
+# 
+# # 3 - shinyApp -> Spins up Shiny App
+# ex:
 shinyApp(ui = ui, server = server)
+# 
+# # input and output are how ui and server communicate
+# ui and server are continuously running and listening to each other
+# ui: listens to output and puts info into input
+# passes on information on state of controls into input (input$my_slider)
+# listens to output for generated plots and tables and changes
+# server: listens to input and puts info into output
+# passes on plots and tables into output (output$my_plot)
+# listens to input for changes in controls
+# 
+# ## I need understand better ggplot package!!
+# 
+# 
