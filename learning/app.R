@@ -38,4 +38,7 @@ shinyApp(ui = ui, server = server)
 # 
 # ## I need understand better ggplot package!!
 # 
+# # Part 2 - Reactives
+# 
+# Making a dataset filterable
 # 
